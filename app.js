@@ -14,7 +14,7 @@ const orderRoutes = require('./routes/order')
 const stripeRoutes = require('./routes/stripePayment')
 const app = express();
 
-const port =process.env.PORT || 4000;
+const port =process.env.PORT || 5050;
 
 
 //db connection
