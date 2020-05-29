@@ -1,5 +1,4 @@
 import React from 'react';
-import { isAuthenticated } from '../auth/helper';
 import Footer1 from './footer/Footer1';
 import NavbarFinal from './navbar/Navbar';
 
