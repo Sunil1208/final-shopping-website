@@ -57,11 +57,14 @@ export const updateCategory = (categoryId, userId, token,category) => {
         method: "PUT",
         headers: {
             Accept: "application/json",
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
         },
-        body: category
+        body: JSON.stringify(category)
     })
     .then( response => {
+        console.log(`Response is : ${response}`)
+        console.log(response)
         return response.json()
     })
     .catch( err => console.log(err))
@@ -136,6 +139,40 @@ export const updateProduct = (productId, userId, token, product) => {
             Authorization: `Bearer ${token}`
         },
         body: product
+    })
+    .then( response => {
+        return response.json()
+    })
+    .catch( err => console.log(err))
+}
+
+export const getUsers = () => {
+    return fetch(`${API}/getAllUsers`, {
+        method:"GET"
+    })
+    .then( response => {
+        return response.json()
+    })
+    .catch(err => console.log(err))
+}
+
+export const getUser = (userId) => {
+    return fetch(`${API}/user/${userId}`, {
+        method: "GET"
+    })
+    .then( response => {
+        return response.json()
+    })
+    .catch( err => console.log(err))
+}
+
+
+export const getAllOrder = (userId, token) => {
+    return fetch(`${API}/order/all/${userId}`, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
     })
     .then( response => {
         return response.json()

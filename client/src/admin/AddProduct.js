@@ -3,15 +3,35 @@ import { createProduct, getCategories } from './helper/adminapicall';
 import { Link } from 'react-router-dom';
 import Base from '../core/Base';
 import { isAuthenticated } from '../auth/helper';
+import { css } from "@emotion/core";
+import {RotateLoader, ScaleLoader} from "react-spinners";
+import { makeStyles } from '@material-ui/core/styles';
+import Alert from '@material-ui/lab/Alert';
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
+import { Button } from '@material-ui/core';
+
+
+const useStyles1 = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
 
 const AddProduct = () => {
 
     const {user, token} = isAuthenticated();
 
+    const [open, setOpen] = useState(true);
+
     const [values, setValues] = useState({
         name: "",
         description: "",
         price: "",
+        origin:"",
         stock : "",
         photo: "",
         categories: [],
@@ -30,6 +50,7 @@ const AddProduct = () => {
       stock,
       categories,
       category,
+      origin,
       loading,
       error,
       createdProduct,
@@ -70,6 +91,7 @@ const AddProduct = () => {
                 ...values,
                 name: "",
                 description: "",
+                origin:"",
                 price: "",
                 photo: "",
                 stock: "",
@@ -89,35 +111,92 @@ const AddProduct = () => {
         })
     }
 
-    const successMessage = () => {
-      return(
-        <div className="alert alert-primary mt-3"
-          style={{display: createdProduct ? "": "none"}}>
-            <h4>{createdProduct} created successfully</h4>
+    const ColorAlerts = () => {
+      const classes = useStyles1();
+      if(createdProduct){
+        return(
+          <div className={classes.root} style={{display: createdProduct ? "": "none"}}>
+              <div className="row">
+              <div className="col-12">
+              <Alert variant="filled" severity="success" color="success" action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setValues({...values, createdProduct: ""})
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              } > 
+                Product added successfully.
+              </Alert>
+              </div>
+              </div>
+          </div>
+        )
+      } else{
+        return(
+          <div className={classes.root} style={{display: error ? "": "none"}}>
+          <div className="row">
+            <div className="col-12">
+            <Alert variant="filled" severity="warning" color="warning" action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setValues({...values, error: ""})
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            } >
+            Error : {error}
+            </Alert>
+            </div>
+          </div>
         </div>
-      )
+        )    
+      }
     }
-   
-    const errorMessage = () => {
-      return(
-        <div className="alert alert-danger mt-3"
-        style={{display: error ? "": "none"}}>
-            <h4>Error : {error} </h4>
-        </div>
-      )
+
+
+
+    const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+    `;
+
+    const loadingMessage = (loading) => {
+      if(loading){
+        return(
+          <div className="sweet-loading">
+          <ScaleLoader
+            css={override}
+
+            color={"#123abc"}
+            loading={loading}
+          />
+          </div>
+        )
+      }
     }
 
     const productForm = () => (
-        <form>
-          <span>Post photo</span>
+        <form className="pt-3 pb-3">
           <div className="form-group">
-            <label className="btn btn-block btn-success">
+            <label className="btn btn-block btn-primary" >
               <input
+              className="text-white"
                 onChange={handleChange("photo")}
                 type="file"
                 name="photo"
                 accept="image"
-                placeholder="choose a file"
+                placeholder="Upload photo"
+                
               />
             </label>
           </div>
@@ -137,6 +216,15 @@ const AddProduct = () => {
               className="form-control"
               placeholder="Description"
             //   value={description}
+            />
+          </div>
+          <div className="form-group">
+          <input
+              onChange={handleChange("origin")}
+              name="origin"
+              className="form-control"
+              placeholder="Origin (optional)"
+              value={origin}
             />
           </div>
           <div className="form-group">
@@ -172,31 +260,30 @@ const AddProduct = () => {
             />
           </div>
     
-          <button
+          <Button
             type="submit"
+            color="primary"
+            variant="contained"
             onClick={onSubmit}
-            className="btn btn-outline-success mb-3"
+            className=" mb-3 text-white font-weight-bold"
+            
           >
-            Create Product
-          </button>
+            Add Product
+          </Button>
         </form>
       );
 
     return (
-        <Base 
-            title="Add Product" 
-            description="Add a product to the database"
-            className="container bg-info p-4"
-            >
-            <Link to="/admin/dashboard" className="btn btn-md btn-dark mb-3">Admin Home</Link>
-            <div className="row bg-dark text-white rounded">
+            <div className="row border rounded" style={{backgroundColor:"#E4E4E4"}}>
+            <div className="col-12 text-center text-white font-weight-bold pt-3 pb-3" style={{backgroundColor:"#3F51B5"}}><span className="display-5">Add Product here</span></div>
                 <div className="col-md-8 offset-md-2">
-                {successMessage()}
-                {errorMessage()}    
+                <div className="col-12 text-center p-3" >
+                  {loadingMessage(loading)}
+                  {ColorAlerts()}
+                </div>   
                 {productForm()}
                 </div>
             </div>
-        </Base>
     )
 }
 

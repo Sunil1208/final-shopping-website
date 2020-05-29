@@ -199,7 +199,8 @@ const UpdateProduct = ({match}) => {
           <button
             type="submit"
             onClick={onSubmit}
-            className="btn btn-outline-success mb-3"
+            className="btn btn-outline text-white font-weight-bold mb-3"
+            style={{backgroundColor:"#5DD292"}}
           >
             Update Product
           </button>
@@ -210,15 +211,20 @@ const UpdateProduct = ({match}) => {
         <Base 
             title="Add Product" 
             description="Add a product to the database"
-            className="container bg-info p-4"
+            className="container p-4"
             >
-            <Link to="/admin/dashboard" className="btn btn-md btn-dark mb-3">Admin Home</Link>
-            <div className="row bg-dark text-white rounded">
-                <div className="col-md-8 offset-md-2">
-                {successMessage()}
-                {errorMessage()}    
-                {productForm()}
-                </div>
+            <div className="col-12 text-center text-dark display-4" >Product Update</div>
+            <Link to="/admin/dashboard" className="btn btn-md font-weight-bold text-white mb-3" style={{backgroundColor:"#5DD292"}}>Admin Home</Link>
+            
+            <div className="row  text-white rounded" >
+            <div className="container-fluid"  >
+            <div className="col-md-8 offset-md-2" style={{backgroundColor:"#BFC0C1"}}>
+            {successMessage()}
+            {errorMessage()}    
+            {productForm()}
+            </div>
+            </div>
+                
             </div>
         </Base>
     )

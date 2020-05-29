@@ -3,7 +3,6 @@ import ImageHelper from './helper/ImageHelper';
 import { Redirect } from 'react-router-dom';
 import { addItemToCart, removeItemFromCart } from './helper/cartHelper';
 
-
 const Card = ({
   product,addtoCart = true,
   removefromCart = false, 
@@ -13,13 +12,16 @@ const Card = ({
     const [redirect, setRedirect] = useState(false);
     const [count, setCount] = useState(product.count);
 
+
     const cardTitle = product ? product.name : "A new product";
     const cardDescription = product ? product.description : "Description of the card"
     const cardPrice = product ? product.price : "Default"
     const cardCategory = product ? product.category.name : "product"
-    
+
+
     const addToCart = () => {
       addItemToCart(product, () => setRedirect(true))
+      
     }
 
     const getARedirect = (redirect) => {
@@ -61,7 +63,7 @@ const Card = ({
     
     
     return (
-      <div className="card text-white  border border-info " style={{backgroundColor:"#202040"}}>
+      <div className="card text-white  border border-info " style={{backgroundColor:"#A7C9C9"}}>
         <div className="card-header lead" style={{backgroundColor:"#070739"}}>{cardTitle}<br></br>
           <div className="badge badge-dark">Category: {cardCategory}</div>
         </div>

@@ -3,15 +3,44 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.9.14",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.53",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "bootstrap": "^4.5.0",
+    "braintree-web-drop-in-react": "^1.1.1",
+    "d3-ease": "^1.0.6",
+    "d3-interpolate": "^1.4.0",
+    "materialize-css": "^1.0.0-rc.2",
+    "mdbreact": "^4.27.0",
+    "node-sass": "^4.14.1",
     "query-string": "^6.12.1",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
+    "react-countup": "^4.3.3",
+    "react-coverflow": "^0.2.20",
+    "react-data-table-component": "^6.9.2",
     "react-dom": "^16.13.1",
+    "react-loading-overlay": "^1.0.1",
+    "react-loading-skeleton": "^2.0.1",
+    "react-material-ui-carousel": "^1.4.5",
+    "react-materialize": "^3.9.2",
+    "react-notifications": "^1.6.0",
+    "react-parallax": "^3.0.3",
+    "react-pure-loaders": "^3.0.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
-    "react-stripe-checkout": "^2.6.3"
+    "react-simple-parallax": "^0.2.6",
+    "react-spinners": "^0.8.3",
+    "react-spring": "^8.0.27",
+    "react-stripe-checkout": "^2.6.3",
+    "react-ui-cards": "^2.0.0",
+    "reactn": "^2.2.7",
+    "recharts": "^1.8.5",
+    "semantic-ui-react": "^0.88.2",
+    "styled-components": "^5.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -19,7 +48,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -29,7 +57,7 @@
       "not dead",
       "not op_mini all"
     ],
-    "proxy": "https://shopping-website-bend.herokuapp.com",
+    "proxy": "https://shopping-website-backend.herokuapp.com/",
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
